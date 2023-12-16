@@ -2,11 +2,22 @@ package com.systemfailed.taskspro.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.systemfailed.taskspro.R
 
 // Set of Material typography styles to start with
+val newFamily = FontFamily(
+    Font(R.font.sono_bold, FontWeight.Bold),
+    Font(R.font.sono_extrabold, FontWeight.ExtraBold),
+    Font(R.font.sono_light, FontWeight.Light),
+    Font(R.font.sono_medium, FontWeight.Medium),
+    Font(R.font.sono_semibold, FontWeight.SemiBold)
+
+
+)
 val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = FontFamily.Default,
