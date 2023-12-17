@@ -1,4 +1,4 @@
-package com.systemfailed.taskspro.ui.theme
+package com.systemfailed.taskspro.presentation.ui
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

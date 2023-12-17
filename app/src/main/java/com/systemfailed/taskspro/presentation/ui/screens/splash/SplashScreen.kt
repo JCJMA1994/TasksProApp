@@ -1,4 +1,4 @@
-package com.systemfailed.taskspro.addtasks.ui.splash
+package com.systemfailed.taskspro.presentation.ui.screens.splash
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,7 +23,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.systemfailed.taskspro.ui.theme.newFamily
+import com.systemfailed.taskspro.presentation.ui.newFamily
 
 @Composable
 fun SplashScreen() {

@@ -1,4 +1,4 @@
-package com.systemfailed.taskspro.ui.theme
+package com.systemfailed.taskspro.presentation.ui
 
 import android.app.Activity
 import android.os.Build
