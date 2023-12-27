@@ -8,7 +8,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor() : ViewModel() {
+class AuthViewModel @Inject constructor(
+
+) : ViewModel() {
+
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> = _email
 
@@ -31,15 +34,16 @@ class AuthViewModel @Inject constructor() : ViewModel() {
 
     private fun enableLogin(email: String, password: String) =
         Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.length > 6
-    /*
-        fun onLoginSelected() {
-            viewModelScope.launch {
-                _isLoading.value = true
-                val result = loginUseCase(email.value!!, password.value!!)
-                if (result) {
-                    Log.i("Joao", "OK")
-                }
-                _isLoading.value = false
+
+
+    /*fun onLoginSelected() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            val result = loginUseCase(email.value!!, password.value!!)
+            if (result.isSuccessful) {
+                Log.i("Joao", "OK")
             }
-        }*/
+            _isLoading.value = false
+        }
+    }*/
 }

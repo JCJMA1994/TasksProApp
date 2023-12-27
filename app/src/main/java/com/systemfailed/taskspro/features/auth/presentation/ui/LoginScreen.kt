@@ -24,8 +24,8 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,6 +43,7 @@ import com.systemfailed.taskspro.common.components.CustomSocial
 import com.systemfailed.taskspro.common.components.CustomSpacer
 import com.systemfailed.taskspro.common.components.CustomTextApp
 import com.systemfailed.taskspro.common.components.CustomTextField
+import com.systemfailed.taskspro.features.auth.presentation.viewmodel.AuthViewModel
 import com.systemfailed.taskspro.navigation.AppScreens
 import com.systemfailed.taskspro.theme.BlueDark
 import com.systemfailed.taskspro.theme.GreenLight
@@ -51,7 +52,7 @@ import com.systemfailed.taskspro.theme.PrimaryBlack
 import kotlin.system.exitProcess
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen(navController: NavController, loginViewModel: AuthViewModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -61,7 +62,7 @@ fun LoginScreen(navController: NavController) {
             .background(LightGray)
     ) {
         Header(Modifier.align(Alignment.TopEnd))
-        Body(Modifier.align(Alignment.Center))
+        Body(Modifier.align(Alignment.Center), loginViewModel)
         Footer(Modifier.align(Alignment.BottomCenter), navController)
     }
 
@@ -69,8 +70,7 @@ fun LoginScreen(navController: NavController) {
 
 @Composable
 fun Header(modifier: Modifier) {
-    Icon(
-        imageVector = Icons.Default.Close,
+    Icon(imageVector = Icons.Default.Close,
         tint = Color.Black,
         contentDescription = "close app",
         modifier = modifier.clickable { exitProcess(0) })
@@ -78,23 +78,19 @@ fun Header(modifier: Modifier) {
 }
 
 @Composable
-fun Body(modifier: Modifier) {
-    val email = remember {
-        mutableStateOf("")
-    }
+fun Body(modifier: Modifier, loginViewModel: AuthViewModel) {
+    val email: String by loginViewModel.email.observeAsState(initial = "")
+    val password: String by loginViewModel.password.observeAsState(initial = "")
 
-    val password = remember {
-        mutableStateOf("")
-    }
     val context = LocalContext.current
 
     Column(modifier = modifier) {
         ImageLogo(Modifier.align(Alignment.CenterHorizontally))
         CustomSpacer(16)
         CustomTextField(
-            value = email.value,
+            value = email,
             onTextChanged = {
-                email.value = it
+                loginViewModel.onLoginChanged(email = it, password = password)
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             placeholder = "Phone number, username or email",
@@ -103,8 +99,9 @@ fun Body(modifier: Modifier) {
         )
         CustomSpacer(8)
         CustomTextField(
-            value = password.value, onTextChanged = {
-                password.value = it
+            value = password,
+            onTextChanged = {
+                loginViewModel.onLoginChanged(email = email, password = it)
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             placeholder = "Password",
@@ -118,7 +115,9 @@ fun Body(modifier: Modifier) {
             text = "Log in",
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
-            onClick = { },
+            onClick = {
+               // loginViewModel.onLoginSelected()
+            },
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
                 containerColor = GreenLight,
@@ -138,34 +137,26 @@ fun Body(modifier: Modifier) {
             verticalAlignment = Alignment.CenterVertically,
 
             ) {
-            CustomSocial(
-                iconSocial = painterResource(id = R.drawable.ic_facebook),
+            CustomSocial(iconSocial = painterResource(id = R.drawable.ic_facebook),
                 contentDescription = "icon Facebook",
                 onClick = {
                     Toast.makeText(context, "Facebook", Toast.LENGTH_LONG).show()
-                }
-            )
-            CustomSocial(
-                iconSocial = painterResource(id = R.drawable.ic_google),
+                })
+            CustomSocial(iconSocial = painterResource(id = R.drawable.ic_google),
                 contentDescription = "icon Google",
                 onClick = {
                     Toast.makeText(context, "Google", Toast.LENGTH_LONG).show()
-                }
-            )
-            CustomSocial(
-                iconSocial = painterResource(id = R.drawable.ic_instagram),
+                })
+            CustomSocial(iconSocial = painterResource(id = R.drawable.ic_instagram),
                 contentDescription = "icon Instagram",
                 onClick = {
                     Toast.makeText(context, "Instagram", Toast.LENGTH_LONG).show()
-                }
-            )
-            CustomSocial(
-                iconSocial = painterResource(id = R.drawable.ic_x),
+                })
+            CustomSocial(iconSocial = painterResource(id = R.drawable.ic_x),
                 contentDescription = "icon X",
                 onClick = {
                     Toast.makeText(context, "X", Toast.LENGTH_LONG).show()
-                }
-            )
+                })
         }
 
     }
@@ -206,8 +197,7 @@ fun ForgotPassword(modifier: Modifier) {
 @Composable
 fun LoginDivider() {
     Row(
-        Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
+        Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
     ) {
         Divider(
             Modifier
@@ -233,12 +223,10 @@ fun LoginDivider() {
 @Composable
 fun Footer(modifier: Modifier, navController: NavController) {
     Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
+        modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Don't have an account?", fontSize = 16.sp,
-            color = PrimaryBlack
+            text = "Don't have an account?", fontSize = 16.sp, color = PrimaryBlack
         )
         Text(
             text = "Sign up.",
@@ -246,10 +234,7 @@ fun Footer(modifier: Modifier, navController: NavController) {
                 .padding(horizontal = 16.dp)
                 .clickable {
                     navController.navigate(AppScreens.RegisterScreen.route)
-                },
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            color = PrimaryBlack
+                }, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = PrimaryBlack
         )
     }
 }

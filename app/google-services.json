@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "395772123216",
+    "firebase_url": "https://taskspro-32e7d-default-rtdb.firebaseio.com",
+    "project_id": "taskspro-32e7d",
+    "storage_bucket": "taskspro-32e7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395772123216:android:d6436cb23ca45622a1d955",
+        "android_client_info": {
+          "package_name": "com.systemfailed.taskspro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "395772123216-uv4o6m7fj94l53t9j0d9pdio1h69njhl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0z82rjmtnmg6Z0Y27t2ezmlv7UpJXdgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "395772123216-uv4o6m7fj94l53t9j0d9pdio1h69njhl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
