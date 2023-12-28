@@ -1,4 +1,5 @@
 package com.systemfailed.taskspro.di.modules
+/*
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -21,4 +22,4 @@ class FirebaseModule {
     }
 
 
-}
+}*/

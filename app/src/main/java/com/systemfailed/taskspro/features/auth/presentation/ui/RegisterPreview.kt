@@ -28,9 +28,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.systemfailed.taskspro.R
 import com.systemfailed.taskspro.common.components.CustomButton
 import com.systemfailed.taskspro.common.components.CustomDivider
@@ -39,13 +39,16 @@ import com.systemfailed.taskspro.common.components.CustomImageLogo
 import com.systemfailed.taskspro.common.components.CustomSocial
 import com.systemfailed.taskspro.common.components.CustomSpacer
 import com.systemfailed.taskspro.common.components.CustomTextField
-import com.systemfailed.taskspro.navigation.AppScreens
 import com.systemfailed.taskspro.theme.BlueDark
 import com.systemfailed.taskspro.theme.GreenLight
 import com.systemfailed.taskspro.theme.LightGray
 
+@Preview(
+    showBackground = true,
+    showSystemUi = true
+)
 @Composable
-fun RegisterScreen(navController: NavController) {
+fun RegisterPreview() {
     Column(
         modifier = Modifier
             .background(LightGray)
@@ -62,16 +65,16 @@ fun RegisterScreen(navController: NavController) {
                 .wrapContentSize(Alignment.TopStart)
                 .padding(bottom = 24.dp)
                 .clickable {
-                    navController.popBackStack()
+
                 }
         )
-        BodyRegister(navController)
+        BodyRegisterP()
     }
+
 }
 
-
 @Composable
-fun BodyRegister(navController: NavController) {
+fun BodyRegisterP() {
     val name = remember {
         mutableStateOf("")
     }
@@ -137,7 +140,6 @@ fun BodyRegister(navController: NavController) {
         fontSize = 16.sp,
         fontWeight = FontWeight.Bold,
         onClick = {
-            navController.navigate(AppScreens.TasksScreen.route)
         },
         modifier = Modifier.fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
