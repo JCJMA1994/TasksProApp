@@ -1,4 +1,4 @@
-package com.systemfailed.taskspro.features.auth.presentation.ui
+package com.systemfailed.taskspro.preview
 
 import android.widget.Toast
 import androidx.compose.foundation.background

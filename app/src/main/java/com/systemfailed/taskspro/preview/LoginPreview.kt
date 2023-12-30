@@ -1,4 +1,4 @@
-package com.systemfailed.taskspro.features.auth.presentation.ui
+package com.systemfailed.taskspro.preview
 
 import android.widget.Toast
 import androidx.compose.foundation.clickable
@@ -33,6 +33,7 @@ import com.systemfailed.taskspro.common.components.CustomImageLogo
 import com.systemfailed.taskspro.common.components.CustomSocial
 import com.systemfailed.taskspro.common.components.CustomSpacer
 import com.systemfailed.taskspro.common.components.CustomTextField
+import com.systemfailed.taskspro.features.auth.presentation.ui.ForgotPassword
 import com.systemfailed.taskspro.theme.BlueDark
 import com.systemfailed.taskspro.theme.GreenLight
 import com.systemfailed.taskspro.theme.PrimaryBlack

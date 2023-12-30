@@ -76,30 +76,39 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    // icon extended
+    //-- icon extended
     implementation("androidx.compose.material:material-icons-extended:1.5.4")
 
-    // navigation
+    //-- navigation
     implementation("androidx.navigation:navigation-compose:2.7.6")
 
-    // livecycle and livedata
+    //-- livecycle and livedata
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
 
-    // retrofit
+    //-- retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    // room
+    //-- room
     implementation("androidx.room:room-runtime:2.6.1")
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
 
-    // dagger hilt
+    //-- dagger hilt
     implementation ("com.google.dagger:hilt-android:2.48.1")
     implementation ("androidx.hilt:hilt-navigation-compose:1.1.0")
     ksp("com.google.dagger:hilt-android-compiler:2.48.1")
 
-    // windows size
+    //-- windows size
     implementation("androidx.compose.material3:material3-window-size-class")
+
+    //-- onBoarding
+    implementation("com.google.accompanist:accompanist-pager:0.15.0")
+
+    //-- lottie
+    implementation("com.airbnb.android:lottie-compose:5.2.0")
+
+    //-- dataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }

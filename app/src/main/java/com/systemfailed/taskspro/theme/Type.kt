@@ -29,8 +29,8 @@ val Typography = Typography(
         fontFamily = PoppinsFont,
         fontWeight = FontWeight.Bold,
         fontSize = 56.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
+        lineHeight = 56.sp,
+        letterSpacing = (-0.5).sp,
     ),
     bodyLarge = TextStyle(
         fontFamily = PoppinsFont,

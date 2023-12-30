@@ -1,5 +1,6 @@
 package com.systemfailed.taskspro.features.auth.presentation.ui
 
+import android.app.Activity
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -41,21 +42,21 @@ import com.systemfailed.taskspro.common.components.CustomImageLogo
 import com.systemfailed.taskspro.common.components.CustomSocial
 import com.systemfailed.taskspro.common.components.CustomSpacer
 import com.systemfailed.taskspro.common.components.CustomTextField
-import com.systemfailed.taskspro.features.auth.presentation.viewmodel.AuthViewModel
+import com.systemfailed.taskspro.features.auth.presentation.viewmodel.LoginViewModel
 import com.systemfailed.taskspro.theme.BlueDark
 import com.systemfailed.taskspro.theme.GreenLight
 import com.systemfailed.taskspro.theme.LightGray
 import com.systemfailed.taskspro.theme.PrimaryBlack
-import kotlin.system.exitProcess
 
 @Composable
-fun LoginScreen(navController: NavController, loginViewModel: AuthViewModel) {
+fun LoginScreen(navController: NavController, loginViewModel: LoginViewModel) {
+    val activity = LocalContext.current as? Activity
     Column(
         modifier = Modifier
             .background(LightGray)
             .fillMaxWidth()
             .fillMaxHeight()
-            .padding(top =72.dp, bottom = 24.dp, start = 24.dp, end = 24.dp)
+            .padding(top = 72.dp, bottom = 24.dp, start = 24.dp, end = 24.dp)
 
     ) {
         CustomHeader(
@@ -66,7 +67,8 @@ fun LoginScreen(navController: NavController, loginViewModel: AuthViewModel) {
                 .wrapContentSize(Alignment.TopEnd)
                 .padding(bottom = 24.dp)
                 .clickable {
-                    exitProcess(0)
+
+                    activity?.finish()
                 }
         )
         BodyLogin(loginViewModel)
@@ -77,7 +79,7 @@ fun LoginScreen(navController: NavController, loginViewModel: AuthViewModel) {
 }
 
 @Composable
-fun BodyLogin(loginViewModel: AuthViewModel) {
+fun BodyLogin(loginViewModel: LoginViewModel) {
     val email: String by loginViewModel.email.observeAsState(initial = "")
     val password: String by loginViewModel.password.observeAsState(initial = "")
 
