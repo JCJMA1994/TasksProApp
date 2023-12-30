@@ -43,6 +43,7 @@ import com.systemfailed.taskspro.common.components.CustomSocial
 import com.systemfailed.taskspro.common.components.CustomSpacer
 import com.systemfailed.taskspro.common.components.CustomTextField
 import com.systemfailed.taskspro.features.auth.presentation.viewmodel.LoginViewModel
+import com.systemfailed.taskspro.navigation.AppScreens
 import com.systemfailed.taskspro.theme.BlueDark
 import com.systemfailed.taskspro.theme.GreenLight
 import com.systemfailed.taskspro.theme.LightGray
@@ -67,11 +68,10 @@ fun LoginScreen(navController: NavController, loginViewModel: LoginViewModel) {
                 .wrapContentSize(Alignment.TopEnd)
                 .padding(bottom = 24.dp)
                 .clickable {
-
                     activity?.finish()
                 }
         )
-        BodyLogin(loginViewModel)
+        BodyLogin(navController, loginViewModel)
         CustomSpacer(32.dp)
         CustomFooter(navController)
     }
@@ -79,11 +79,12 @@ fun LoginScreen(navController: NavController, loginViewModel: LoginViewModel) {
 }
 
 @Composable
-fun BodyLogin(loginViewModel: LoginViewModel) {
+fun BodyLogin(navController: NavController, loginViewModel: LoginViewModel) {
     val email: String by loginViewModel.email.observeAsState(initial = "")
     val password: String by loginViewModel.password.observeAsState(initial = "")
 
     val context = LocalContext.current
+
     CustomImageLogo()
     CustomSpacer(16.dp)
     CustomTextField(
@@ -119,7 +120,10 @@ fun BodyLogin(loginViewModel: LoginViewModel) {
         fontSize = 16.sp,
         fontWeight = FontWeight.Bold,
         onClick = {
-            // loginViewModel.onLoginSelected()
+            loginViewModel.onLoginSelected() {
+                navController.navigate(AppScreens.TasksScreen.route)
+            }
+
         },
         modifier = Modifier.fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
@@ -143,22 +147,22 @@ fun BodyLogin(loginViewModel: LoginViewModel) {
         CustomSocial(iconSocial = painterResource(id = R.drawable.ic_facebook),
             contentDescription = "icon Facebook",
             onClick = {
-                Toast.makeText(context, "Facebook", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Facebook", Toast.LENGTH_SHORT).show()
             })
         CustomSocial(iconSocial = painterResource(id = R.drawable.ic_google),
             contentDescription = "icon Google",
             onClick = {
-                Toast.makeText(context, "Google", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Google", Toast.LENGTH_SHORT).show()
             })
         CustomSocial(iconSocial = painterResource(id = R.drawable.ic_instagram),
             contentDescription = "icon Instagram",
             onClick = {
-                Toast.makeText(context, "Instagram", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Instagram", Toast.LENGTH_SHORT).show()
             })
         CustomSocial(iconSocial = painterResource(id = R.drawable.ic_x),
             contentDescription = "icon X",
             onClick = {
-                Toast.makeText(context, "X", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "X", Toast.LENGTH_SHORT).show()
             })
     }
 

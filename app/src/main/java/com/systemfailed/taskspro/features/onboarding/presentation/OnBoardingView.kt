@@ -22,6 +22,7 @@ import com.google.accompanist.pager.PagerState
 import com.systemfailed.taskspro.common.components.CustomButtonOnBoarding
 import com.systemfailed.taskspro.common.components.CustomIndicator
 import com.systemfailed.taskspro.features.onboarding.data.PageData
+import com.systemfailed.taskspro.features.onboarding.presentation.viewmodel.DataStoreViewModel
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -30,6 +31,7 @@ fun OnboardingPager(
     pagerState: PagerState,
     navController: NavController,
     modifier: Modifier = Modifier,
+    dataStoreViewModel: DataStoreViewModel
 ) {
     Box(modifier = modifier) {
         Column(
@@ -75,7 +77,11 @@ fun OnboardingPager(
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 120.dp)
         ) {
-            CustomButtonOnBoarding(currentPage = pagerState.currentPage, navController)
+            CustomButtonOnBoarding(
+                currentPage = pagerState.currentPage,
+                navController,
+                dataStoreViewModel
+            )
         }
     }
 }

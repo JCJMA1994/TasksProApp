@@ -10,15 +10,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.systemfailed.taskspro.features.onboarding.presentation.viewmodel.DataStoreViewModel
 import com.systemfailed.taskspro.navigation.AppScreens
 
 @Composable
-fun CustomButtonOnBoarding(currentPage: Int, navController: NavController) {
+fun CustomButtonOnBoarding(
+    currentPage: Int,
+    navController: NavController,
+    dataStoreViewModel: DataStoreViewModel
+) {
 
-    val viewModel: DataStoreViewModel = viewModel()
     Row(
         modifier = Modifier
             .padding(bottom = 24.dp)
@@ -31,7 +33,7 @@ fun CustomButtonOnBoarding(currentPage: Int, navController: NavController) {
                     /* CoroutineScope(Dispatchers.IO).launch {
                          store.saveOnBoarding(true)
                      }*/
-                    viewModel.saveOnBoarding(true)
+                    dataStoreViewModel.saveOnBoarding(true)
                     navController.navigate(AppScreens.LoginScreen.route)
                 }
             ) {

@@ -1,15 +1,19 @@
 package com.systemfailed.taskspro.features.auth.presentation.viewmodel
 
+import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.systemfailed.taskspro.features.auth.domain.usecases.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-
+    private val loginUseCase: LoginUseCase
 ) : ViewModel() {
 
     private val _email = MutableLiveData<String>()
@@ -36,14 +40,17 @@ class LoginViewModel @Inject constructor(
         Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.length > 6
 
 
-    /*fun onLoginSelected() {
+    fun onLoginSelected(onSuccess: () -> Unit) {
         viewModelScope.launch {
             _isLoading.value = true
-            val result = loginUseCase(email.value!!, password.value!!)
-            if (result.isSuccessful) {
-                Log.i("Joao", "OK")
+            loginUseCase(email.value!!, password.value!!).addOnCompleteListener { result ->
+                if (result.isSuccessful) {
+                    Log.i("Joao", "Inicio de sesion correcto")
+                    onSuccess()
+                }
             }
+
             _isLoading.value = false
         }
-    }*/
+    }
 }
