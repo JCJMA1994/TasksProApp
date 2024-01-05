@@ -5,7 +5,16 @@
       <entry key="CustomButtonPreview">
         <State />
       </entry>
+      <entry key="HomePreviewScreen">
+        <State />
+      </entry>
       <entry key="LoginP">
+        <State />
+      </entry>
+      <entry key="PreviewApp">
+        <State />
+      </entry>
+      <entry key="TasksPreview">
         <State />
       </entry>
       <entry key="app">

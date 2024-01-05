@@ -15,19 +15,29 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Password
+import androidx.compose.material.icons.filled.PermIdentity
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -39,13 +49,14 @@ import com.systemfailed.taskspro.common.components.CustomImageLogo
 import com.systemfailed.taskspro.common.components.CustomSocial
 import com.systemfailed.taskspro.common.components.CustomSpacer
 import com.systemfailed.taskspro.common.components.CustomTextField
+import com.systemfailed.taskspro.features.auth.presentation.viewmodel.AuthViewModel
 import com.systemfailed.taskspro.navigation.AppScreens
 import com.systemfailed.taskspro.theme.BlueDark
 import com.systemfailed.taskspro.theme.GreenLight
 import com.systemfailed.taskspro.theme.LightGray
 
 @Composable
-fun RegisterScreen(navController: NavController) {
+fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
     Column(
         modifier = Modifier
             .background(LightGray)
@@ -54,8 +65,7 @@ fun RegisterScreen(navController: NavController) {
             .padding(start = 24.dp, end = 24.dp, top = 16.dp)
 
     ) {
-        CustomHeader(
-            imageVector = Icons.Filled.ArrowBack,
+        CustomHeader(imageVector = Icons.Filled.ArrowBack,
             contentDescription = "close app",
             modifier = Modifier
                 .fillMaxWidth()
@@ -63,89 +73,114 @@ fun RegisterScreen(navController: NavController) {
                 .padding(bottom = 24.dp)
                 .clickable {
                     navController.popBackStack()
-                }
-        )
-        BodyRegister(navController)
+                })
+        BodyRegister(navController, authViewModel)
     }
 }
 
 
 @Composable
-fun BodyRegister(navController: NavController) {
-    val name = remember {
-        mutableStateOf("")
-    }
-    val email = remember {
-        mutableStateOf("")
-    }
-    val password = remember {
-        mutableStateOf("")
-    }
-    val confirmPassword = remember {
-        mutableStateOf("")
-    }
+fun BodyRegister(navController: NavController, authViewModel: AuthViewModel) {
+    val username: String by authViewModel.username.observeAsState(initial = "")
+    val name: String by authViewModel.name.observeAsState(initial = "")
+    val lastname: String by authViewModel.lastname.observeAsState(initial = "")
+    val email: String by authViewModel.email.observeAsState(initial = "")
+    val password: String by authViewModel.password.observeAsState(initial = "")
+
+    val isRegisterEnable: Boolean by authViewModel.isRegisterEnable.observeAsState(initial = false)
+
     val context = LocalContext.current
+
+    var isPasswordVisible by remember { mutableStateOf(false) }
+
+    val imagen = if (isPasswordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
+
     CustomImageLogo()
     CustomSpacer(16.dp)
     CustomTextField(
-        value = name.value,
+        value = username,
+        placeholder = "Enter your username",
+        keyboardOptions = KeyboardOptions.Default,
+        leadingIcon = Icons.Filled.PermIdentity,
+        onTextChanged = {
+            authViewModel.onRegisterChanged(username = it, name, lastname, email, password)
+        },
+        visualTransformation = VisualTransformation.None
+
+    )
+    CustomSpacer(16.dp)
+    CustomTextField(
+        value = name,
         placeholder = "Enter your name",
-        keyboardOptions = KeyboardOptions.Default,
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Next,
+            keyboardType = KeyboardType.Text
+        ),
         leadingIcon = Icons.Filled.Person,
-        trailingIcon = Icons.Filled.Send,
         onTextChanged = {
-
-        }
-
+            authViewModel.onRegisterChanged(username, name = it, lastname, email, password)
+        },
+        visualTransformation = VisualTransformation.None
     )
     CustomSpacer(16.dp)
     CustomTextField(
-        value = email.value,
+        value = lastname,
+        placeholder = "Enter your lastname",
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Next,
+            keyboardType = KeyboardType.Text
+        ),
+        leadingIcon = Icons.Filled.Person,
+        onTextChanged = {
+            authViewModel.onRegisterChanged(username, name, lastname = it, email, password)
+        },
+        visualTransformation = VisualTransformation.None
+    )
+    CustomSpacer(16.dp)
+    CustomTextField(
+        value = email,
         placeholder = "Enter your email",
-        keyboardOptions = KeyboardOptions.Default,
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Next,
+            keyboardType = KeyboardType.Email
+        ),
         leadingIcon = Icons.Filled.Email,
-        trailingIcon = Icons.Filled.Send,
         onTextChanged = {
-
-        }
+            authViewModel.onRegisterChanged(username, name, lastname, email = it, password)
+        },
+        visualTransformation = VisualTransformation.None
     )
     CustomSpacer(16.dp)
     CustomTextField(
-        value = password.value,
+        value = password,
         placeholder = "Enter your password",
-        keyboardOptions = KeyboardOptions.Default,
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Done,
+            keyboardType = KeyboardType.Password
+        ),
         leadingIcon = Icons.Filled.Password,
-        trailingIcon = Icons.Filled.Visibility,
+        trailingIcon = {
+            IconButton(onClick = { isPasswordVisible = !isPasswordVisible }) {
+                Icon(imageVector = imagen, contentDescription = null)
+            }
+        },
         onTextChanged = {
-
-        }
-    )
-    CustomSpacer(16.dp)
-    CustomTextField(
-        value = confirmPassword.value,
-        placeholder = "Confirm your name",
-        keyboardOptions = KeyboardOptions.Default,
-        leadingIcon = Icons.Filled.Password,
-        trailingIcon = Icons.Filled.Visibility,
-        onTextChanged = {
-
-        }
+            authViewModel.onRegisterChanged(username, name, lastname, email, password = it)
+        },
+        visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation()
     )
     CustomSpacer(16.dp)
     CustomButton(
-        text = "Sign up",
-        fontSize = 16.sp,
-        fontWeight = FontWeight.Bold,
-        onClick = {
-            navController.navigate(AppScreens.TasksScreen.route)
-        },
-        modifier = Modifier.fillMaxWidth(),
-        colors = ButtonDefaults.buttonColors(
+        text = "Sign up", fontSize = 16.sp, fontWeight = FontWeight.Bold, onClick = {
+            authViewModel.onRegisterSelected {
+                navController.navigate(AppScreens.TasksScreen.route)
+            }
+        }, modifier = Modifier.fillMaxWidth(), colors = ButtonDefaults.buttonColors(
             containerColor = GreenLight,
             disabledContainerColor = Color(0xFF78C8F9),
             contentColor = BlueDark,
             disabledContentColor = Color.White
-        )
+        ), enabled = isRegisterEnable
     )
     CustomSpacer(8.dp)
     CustomDivider()

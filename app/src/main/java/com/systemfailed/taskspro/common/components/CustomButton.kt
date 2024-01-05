@@ -15,12 +15,14 @@ fun CustomButton(
     modifier: Modifier,
     fontSize: TextUnit,
     fontWeight: FontWeight,
-    colors: ButtonColors
+    colors: ButtonColors,
+    enabled: Boolean
 ) {
     Button(
         onClick = { onClick() },
         modifier = modifier,
-        colors = colors
+        colors = colors,
+        enabled = enabled
     ) {
         Text(
             text = text,

@@ -2,7 +2,7 @@ package com.systemfailed.taskspro.di.modules
 
 import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import com.systemfailed.taskspro.features.onboarding.data.StoreOnBoarding
 import dagger.Module
 import dagger.Provides
@@ -28,7 +28,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideFirebaseDatabase(): FirebaseDatabase {
-        return FirebaseDatabase.getInstance()
+    fun provideFirebaseDatabase(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
     }
 }

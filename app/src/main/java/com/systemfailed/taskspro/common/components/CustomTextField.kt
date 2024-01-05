@@ -10,10 +10,12 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.systemfailed.taskspro.theme.GreenLight
@@ -28,9 +30,9 @@ fun CustomTextField(
     keyboardOptions: KeyboardOptions,
     singleLine: Boolean = true,
     leadingIcon: ImageVector,
-    trailingIcon: ImageVector,
+    trailingIcon: (@Composable () -> Unit)? = null,
     onTextChanged: (String) -> Unit,
-    shape: CutCornerShape = CutCornerShape(topStart = 15.dp, topEnd = 10.dp),
+    shape: CutCornerShape = remember { CutCornerShape(topStart = 15.dp, topEnd = 10.dp) },
     colors: TextFieldColors = TextFieldDefaults.colors(
         focusedIndicatorColor = GreenLight,
         unfocusedIndicatorColor = Color.Transparent,
@@ -41,6 +43,7 @@ fun CustomTextField(
         unfocusedContainerColor = WhiteLight,
         focusedLabelColor = WhiteLight
     ),
+    visualTransformation: VisualTransformation
 ) {
     TextField(
         value = value,
@@ -61,15 +64,12 @@ fun CustomTextField(
                 contentDescription = null,
             )
         },
-        trailingIcon = {
-            Icon(
-                imageVector = trailingIcon,
-                contentDescription = null,
-            )
-        },
+        trailingIcon = trailingIcon,
         shape = shape,
-        onValueChange = onTextChanged
+        onValueChange = onTextChanged,
+        visualTransformation = visualTransformation,
     )
+
 }
 
 @SuppressLint("UnnecessaryComposedModifier")
