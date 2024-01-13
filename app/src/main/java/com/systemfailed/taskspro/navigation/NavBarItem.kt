@@ -18,7 +18,7 @@ sealed class TopLevelDestination(
         selectIcon = {
             Icon(
                 imageVector = Icons.Filled.Home,
-                contentDescription = "Home Icona"
+                contentDescription = "Home Icon"
             )
         }
     )
@@ -29,7 +29,7 @@ sealed class TopLevelDestination(
         selectIcon = {
             Icon(
                 imageVector = Icons.Filled.Task,
-                contentDescription = "Home Icona"
+                contentDescription = "Task Icon"
             )
         }
     )
@@ -40,7 +40,7 @@ sealed class TopLevelDestination(
         selectIcon = {
             Icon(
                 imageVector = Icons.Filled.Person,
-                contentDescription = "Home Icona"
+                contentDescription = "Person Icon"
             )
         }
     )

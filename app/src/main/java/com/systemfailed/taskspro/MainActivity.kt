@@ -1,8 +1,12 @@
 package com.systemfailed.taskspro
 
+import android.Manifest
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
@@ -17,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.systemfailed.taskspro.features.home.presentation.viewmodel.HomeViewModel
 import com.systemfailed.taskspro.navigation.AppNavigation
 import com.systemfailed.taskspro.navigation.MyBottonNavigationBar
 import com.systemfailed.taskspro.navigation.navItems
@@ -26,9 +31,23 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private val viewModel: HomeViewModel by viewModels()
+    private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
+
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        permissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) {
+            viewModel.loadWeatherInfo()
+        }
+        permissionLauncher.launch(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+            )
+        )
         setContent {
             val windowSize = calculateWindowSizeClass(this)
             TasksProTheme(
@@ -37,6 +56,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     color = LightGray
                 ) {
+
                     Box(
                         modifier = Modifier
                             .fillMaxSize()

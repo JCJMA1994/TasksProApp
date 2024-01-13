@@ -10,6 +10,7 @@ import com.systemfailed.taskspro.features.auth.presentation.ui.LoginScreen
 import com.systemfailed.taskspro.features.auth.presentation.ui.RegisterScreen
 import com.systemfailed.taskspro.features.auth.presentation.viewmodel.AuthViewModel
 import com.systemfailed.taskspro.features.home.presentation.ui.HomeScreen
+import com.systemfailed.taskspro.features.home.presentation.viewmodel.HomeViewModel
 import com.systemfailed.taskspro.features.onboarding.presentation.MainOnBoarding
 import com.systemfailed.taskspro.features.onboarding.presentation.viewmodel.DataStoreViewModel
 import com.systemfailed.taskspro.features.profile.presentation.ui.ProfileScreen
@@ -22,6 +23,8 @@ fun AppNavigation(controller: NavHostController) {
 
     val authViewModel: AuthViewModel = viewModel()
     val dataStoreViewModel: DataStoreViewModel = viewModel()
+
+    val homeViewModel: HomeViewModel = viewModel()
 
     val store = dataStoreViewModel.getBoarding.collectAsState(initial = false)
 
@@ -42,7 +45,7 @@ fun AppNavigation(controller: NavHostController) {
             RegisterScreen(controller, authViewModel)
         }
         composable(AppScreens.HomeScreen.route) {
-            HomeScreen(controller)
+            HomeScreen(homeViewModel)
         }
         composable(AppScreens.TasksScreen.route) {
             TasksScreen()

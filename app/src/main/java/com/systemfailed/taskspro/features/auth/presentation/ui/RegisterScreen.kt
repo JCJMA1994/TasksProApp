@@ -100,7 +100,10 @@ fun BodyRegister(navController: NavController, authViewModel: AuthViewModel) {
     CustomTextField(
         value = username,
         placeholder = "Enter your username",
-        keyboardOptions = KeyboardOptions.Default,
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Next,
+            keyboardType = KeyboardType.Text
+        ),
         leadingIcon = Icons.Filled.PermIdentity,
         onTextChanged = {
             authViewModel.onRegisterChanged(username = it, name, lastname, email, password)
@@ -155,7 +158,7 @@ fun BodyRegister(navController: NavController, authViewModel: AuthViewModel) {
         value = password,
         placeholder = "Enter your password",
         keyboardOptions = KeyboardOptions(
-            imeAction = ImeAction.Done,
+            imeAction = ImeAction.Go,
             keyboardType = KeyboardType.Password
         ),
         leadingIcon = Icons.Filled.Password,

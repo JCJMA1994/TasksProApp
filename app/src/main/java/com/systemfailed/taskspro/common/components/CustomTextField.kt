@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.VisualTransformation
@@ -43,8 +45,9 @@ fun CustomTextField(
         unfocusedContainerColor = WhiteLight,
         focusedLabelColor = WhiteLight
     ),
-    visualTransformation: VisualTransformation
-) {
+    visualTransformation: VisualTransformation,
+
+    ) {
     TextField(
         value = value,
         modifier = Modifier.myCustomModifier(),
@@ -72,9 +75,13 @@ fun CustomTextField(
 
 }
 
-@SuppressLint("UnnecessaryComposedModifier")
+@SuppressLint("UnnecessaryComposedModifier", "ModifierFactoryUnreferencedReceiver")
 fun Modifier.myCustomModifier() = composed {
+    val focus = remember {
+        FocusRequester()
+    }
     Modifier
         .fillMaxWidth()
+        .focusRequester(focus)
 }
 

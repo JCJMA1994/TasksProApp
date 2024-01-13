@@ -137,7 +137,7 @@ fun BodyLogin(navController: NavController, authViewModel: AuthViewModel) {
             authViewModel.onLoginChanged(email = email, password = it)
         },
         keyboardOptions = KeyboardOptions(
-            imeAction = ImeAction.Done,
+            imeAction = ImeAction.Go,
             keyboardType = KeyboardType.Password
         ),
         placeholder = "Password",
