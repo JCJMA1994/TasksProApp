@@ -5,6 +5,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Task
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 
 sealed class TopLevelDestination(
@@ -18,7 +19,8 @@ sealed class TopLevelDestination(
         selectIcon = {
             Icon(
                 imageVector = Icons.Filled.Home,
-                contentDescription = "Home Icon"
+                contentDescription = "Home Icon",
+                tint = MaterialTheme.colorScheme.tertiary
             )
         }
     )
@@ -29,7 +31,8 @@ sealed class TopLevelDestination(
         selectIcon = {
             Icon(
                 imageVector = Icons.Filled.Task,
-                contentDescription = "Task Icon"
+                contentDescription = "Task Icon",
+                tint = MaterialTheme.colorScheme.tertiary
             )
         }
     )
@@ -40,7 +43,8 @@ sealed class TopLevelDestination(
         selectIcon = {
             Icon(
                 imageVector = Icons.Filled.Person,
-                contentDescription = "Person Icon"
+                contentDescription = "Person Icon",
+                tint = MaterialTheme.colorScheme.tertiary
             )
         }
     )

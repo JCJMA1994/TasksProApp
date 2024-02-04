@@ -71,7 +71,7 @@ fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
             .background(LightGray)
             .fillMaxWidth()
             .fillMaxHeight()
-            .padding(top = 72.dp, bottom = 24.dp, start = 24.dp, end = 24.dp)
+            .padding(top = 48.dp, bottom = 24.dp, start = 24.dp, end = 24.dp)
 
     ) {
         if (isLoading) {

@@ -11,16 +11,21 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.systemfailed.taskspro.features.home.presentation.viewmodel.HomeViewModel
 import com.systemfailed.taskspro.navigation.AppNavigation
 import com.systemfailed.taskspro.navigation.MyBottonNavigationBar
@@ -37,6 +42,9 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         permissionLauncher = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) {
@@ -50,6 +58,17 @@ class MainActivity : ComponentActivity() {
         )
         setContent {
             val windowSize = calculateWindowSizeClass(this)
+            val systemUiController = rememberSystemUiController()
+            val useDarkIcons = !isSystemInDarkTheme()
+
+            DisposableEffect(systemUiController, useDarkIcons) {
+                // Actualiza todos los colores de la barra del sistema para que sean transparentes
+                systemUiController.setStatusBarColor(
+                    color = Color.Transparent,
+                    darkIcons = useDarkIcons
+                )
+                onDispose { }
+            }
             TasksProTheme(
                 windowSize = windowSize.widthSizeClass
             ) {

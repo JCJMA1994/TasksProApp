@@ -12,6 +12,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,6 +26,7 @@ fun MyBottonNavigationBar(
     currentDestination: NavDestination?
 ) {
     NavigationBar {
+        contentColorFor(backgroundColor = MaterialTheme.colorScheme.surface)
         navItems.forEach { screen ->
             val select = currentDestination?.route == screen.route
             NavigationBarItem(
@@ -39,7 +41,7 @@ fun MyBottonNavigationBar(
                     }
                 },
                 colors = NavigationBarItemDefaults.colors(
-                    indicatorColor = MaterialTheme.colorScheme.onBackground
+                    indicatorColor = MaterialTheme.colorScheme.onBackground,
                 ),
                 icon = if (select) {
                     {
@@ -47,14 +49,14 @@ fun MyBottonNavigationBar(
                             Text(
                                 text = screen.iconTexId,
                                 style = MaterialTheme.typography.labelLarge,
-                                color = MaterialTheme.colorScheme.tertiary
+                                color = MaterialTheme.colorScheme.primary
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                             Box(
                                 modifier = Modifier
                                     .size(5.dp)
                                     .background(
-                                        color = MaterialTheme.colorScheme.tertiary,
+                                        color = MaterialTheme.colorScheme.primary,
                                         shape = CircleShape
                                     )
                             )

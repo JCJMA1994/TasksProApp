@@ -11,23 +11,25 @@ import androidx.compose.runtime.staticCompositionLocalOf
 
 
 private val LightColorScheme = lightColorScheme(
-    primary = PrimaryWhite,
-    secondary = Gray,
-    tertiary = LightGray,
-    background = PrimaryWhite
+    primary = PrimaryBlack,
+    onPrimary = PrimaryBlack,
+    surface = BottomBar,
+    onBackground = OnBackground,
+    tertiary = Tertiary
+
 )
 
 // dimens
-private val LocalDimens = staticCompositionLocalOf { DefaultDimens }
+
+private val LocalDimens = staticCompositionLocalOf { DefaultsDimens }
 
 @Composable
-fun ProvideDimens(
-    dimens: Dimens, content: @Composable () -> Unit
+private fun ProvideDimens(
+    dimensions: Dimens,
+    content: @Composable () -> Unit
 ) {
-    val dimensSet = remember {
-        dimens
-    }
-    CompositionLocalProvider(LocalDimens provides dimens, content = content)
+    val dimensionSet = remember { dimensions }
+    CompositionLocalProvider(LocalDimens provides dimensionSet, content = content)
 }
 
 @Composable
@@ -35,11 +37,12 @@ fun TasksProTheme(
     windowSize: WindowWidthSizeClass = WindowWidthSizeClass.Compact,
     content: @Composable () -> Unit
 ) {
-
-    val dimensions = if (windowSize > WindowWidthSizeClass.Compact) TabletDimens else DefaultDimens
-    ProvideDimens(dimens = dimensions) {
+    val dimensions = if (windowSize > WindowWidthSizeClass.Compact) TabletDimens else DefaultsDimens
+    ProvideDimens(dimensions = dimensions) {
         MaterialTheme(
-            colorScheme = LightColorScheme, typography = Typography, content = content
+            colorScheme = LightColorScheme,
+            typography = Typography,
+            content = content
         )
     }
 
@@ -47,5 +50,7 @@ fun TasksProTheme(
 
 object TasksProTheme {
     val dimens: Dimens
-        @Composable @ReadOnlyComposable get() = LocalDimens.current
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalDimens.current
 }
