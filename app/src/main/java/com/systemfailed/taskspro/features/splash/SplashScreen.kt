@@ -23,7 +23,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.systemfailed.taskspro.common.components.CustomTextApp
 import com.systemfailed.taskspro.navigation.AppScreens
@@ -72,7 +71,6 @@ fun SplashScreen() {
             textStyle = MaterialTheme.typography.displayLarge.copy(
                 color = Color.Black,
                 textAlign = TextAlign.Center,
-                fontSize = 64.sp
             )
         )
     }

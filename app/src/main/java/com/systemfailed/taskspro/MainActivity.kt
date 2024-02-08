@@ -30,7 +30,6 @@ import com.systemfailed.taskspro.features.home.presentation.viewmodel.HomeViewMo
 import com.systemfailed.taskspro.navigation.AppNavigation
 import com.systemfailed.taskspro.navigation.MyBottonNavigationBar
 import com.systemfailed.taskspro.navigation.navItems
-import com.systemfailed.taskspro.theme.LightGray
 import com.systemfailed.taskspro.theme.TasksProTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -73,7 +72,8 @@ class MainActivity : ComponentActivity() {
                 windowSize = windowSize.widthSizeClass
             ) {
                 Surface(
-                    color = LightGray
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
                 ) {
 
                     Box(

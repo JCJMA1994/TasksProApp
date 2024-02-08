@@ -25,7 +25,7 @@ fun CustomTextApp(
     var textApp by remember {
         mutableStateOf(textStyle)
     }
-    val fontSizeFactor = 0.95
+    val fontSizeFactor = 0.85
     Text(
         buildAnnotatedString {
             withStyle(
@@ -42,8 +42,9 @@ fun CustomTextApp(
         style = textApp,
         onTextLayout = { result ->
             if (result.didOverflowWidth) {
-                textApp = textStyle.copy(
-                    fontSize = textStyle.fontSize * fontSizeFactor)
+                textApp = textApp.copy(
+                    fontSize = textApp.fontSize * fontSizeFactor
+                )
             }
         },
         modifier = modifier

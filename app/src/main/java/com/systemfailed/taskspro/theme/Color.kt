@@ -16,3 +16,14 @@ val LightGray = Color(0xFFF0F2F7)
 val BottomBar = Color(0xFFEDE8FE)
 val Tertiary = Color(0xFFB49FF2)
 val OnBackground = Color(0xFF5F33E0)
+
+
+// New colors
+val CyanSky = Color(0xFFDBFEFF)
+val Cyan = Color(0xFF00AEB4)
+val CyanLight = Color(0xFF00CBD2)
+
+val DarkGray = Color(0xFF4E4E4E)
+
+val Black = Color(0xFF000000)
+val White = Color(0xFFFFFFFF)

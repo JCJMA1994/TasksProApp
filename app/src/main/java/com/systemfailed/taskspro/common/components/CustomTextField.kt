@@ -2,6 +2,7 @@ package com.systemfailed.taskspro.common.components
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
@@ -11,16 +12,17 @@ import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.systemfailed.taskspro.theme.GreenLight
+import com.systemfailed.taskspro.theme.Black
+import com.systemfailed.taskspro.theme.Cyan
+import com.systemfailed.taskspro.theme.CyanSky
 import com.systemfailed.taskspro.theme.WhiteLight
 
 
@@ -36,12 +38,12 @@ fun CustomTextField(
     onTextChanged: (String) -> Unit,
     shape: CutCornerShape = remember { CutCornerShape(topStart = 15.dp, topEnd = 10.dp) },
     colors: TextFieldColors = TextFieldDefaults.colors(
-        focusedIndicatorColor = GreenLight,
+        focusedIndicatorColor = Cyan,
         unfocusedIndicatorColor = Color.Transparent,
-        focusedTextColor = Color.Black,
-        cursorColor = GreenLight,
+        focusedTextColor = Black,
+        cursorColor = Black,
         //container
-        focusedContainerColor = GreenLight,
+        focusedContainerColor = CyanSky,
         unfocusedContainerColor = WhiteLight,
         focusedLabelColor = WhiteLight
     ),
@@ -77,11 +79,8 @@ fun CustomTextField(
 
 @SuppressLint("UnnecessaryComposedModifier", "ModifierFactoryUnreferencedReceiver")
 fun Modifier.myCustomModifier() = composed {
-    val focus = remember {
-        FocusRequester()
-    }
     Modifier
         .fillMaxWidth()
-        .focusRequester(focus)
+        .wrapContentHeight(Alignment.Top)
 }
 

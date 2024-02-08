@@ -19,7 +19,6 @@ import androidx.compose.material.icons.filled.PermIdentity
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -30,7 +29,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -51,8 +49,6 @@ import com.systemfailed.taskspro.common.components.CustomSpacer
 import com.systemfailed.taskspro.common.components.CustomTextField
 import com.systemfailed.taskspro.features.auth.presentation.viewmodel.AuthViewModel
 import com.systemfailed.taskspro.navigation.AppScreens
-import com.systemfailed.taskspro.theme.BlueDark
-import com.systemfailed.taskspro.theme.GreenLight
 import com.systemfailed.taskspro.theme.LightGray
 
 @Composable
@@ -174,16 +170,14 @@ fun BodyRegister(navController: NavController, authViewModel: AuthViewModel) {
     )
     CustomSpacer(16.dp)
     CustomButton(
-        text = "Sign up", fontSize = 16.sp, fontWeight = FontWeight.Bold, onClick = {
+        text = "Sign up", fontSize = 16.sp, fontWeight = FontWeight.Bold,
+        onClick = {
             authViewModel.onRegisterSelected {
                 navController.navigate(AppScreens.TasksScreen.route)
             }
-        }, modifier = Modifier.fillMaxWidth(), colors = ButtonDefaults.buttonColors(
-            containerColor = GreenLight,
-            disabledContainerColor = Color(0xFF78C8F9),
-            contentColor = BlueDark,
-            disabledContentColor = Color.White
-        ), enabled = isRegisterEnable
+        },
+        modifier = Modifier.fillMaxWidth(),
+        enabled = isRegisterEnable,
     )
     CustomSpacer(8.dp)
     CustomDivider()

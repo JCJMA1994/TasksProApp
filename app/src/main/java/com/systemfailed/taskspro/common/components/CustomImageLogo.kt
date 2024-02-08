@@ -13,7 +13,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.systemfailed.taskspro.R
 
 @Composable
@@ -33,7 +32,6 @@ fun CustomImageLogo() {
             text = "Tasks",
             textStyle = MaterialTheme.typography.displayLarge.copy(
                 color = Color.Black,
-                fontSize = 64.sp,
                 textAlign = TextAlign.Center
             )
         )
